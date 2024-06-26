@@ -7,7 +7,9 @@ function PostPage() {
   const { postId } = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:3000/posts/${postId}`, { mode: 'cors' })
+    fetch(`https://backend-green-butterfly-9917.fly.dev/posts/${postId}`, {
+      mode: 'cors',
+    })
       .then((response) => response.json())
       .then((response) => {
         setPost(response.post);

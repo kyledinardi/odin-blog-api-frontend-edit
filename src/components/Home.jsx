@@ -12,7 +12,9 @@ function Home() {
     if (!isAuth) {
       navigate('/login');
     } else {
-      fetch('http://localhost:3000/posts', { mode: 'cors' })
+      fetch('https://backend-green-butterfly-9917.fly.dev/posts', {
+        mode: 'cors',
+      })
         .then((response) => response.json())
         .then((response) => setPosts(response))
         .catch((error) => {
@@ -24,19 +26,22 @@ function Home() {
   async function createPost(e) {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:3000/posts', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://backend-green-butterfly-9917.fly.dev/posts',
+      {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: e.target[0].value,
+          isPublished: e.target[1].checked,
+          text: e.target[2].value,
+        }),
       },
-      body: JSON.stringify({
-        title: e.target[0].value,
-        isPublished: e.target[1].checked,
-        text: e.target[2].value,
-      }),
-    });
+    );
 
     const responseJson = await response.json();
     setPosts(responseJson.posts);

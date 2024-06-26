@@ -22,12 +22,15 @@ function Login() {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/auth/login', {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        'https://backend-green-butterfly-9917.fly.dev/auth/login',
+        {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        },
+      );
 
       const responseJson = await response.json();
       localStorage.setItem('token', responseJson.token);

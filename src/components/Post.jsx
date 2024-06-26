@@ -36,19 +36,22 @@ function Post({
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3000/posts/${postId}`, {
-        method: 'PUT',
-        mode: 'cors',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://backend-green-butterfly-9917.fly.dev/posts/${postId}`,
+        {
+          method: 'PUT',
+          mode: 'cors',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: e.target[0].value,
+            isPublished: e.target[1].checked,
+            text: e.target[2].value,
+          }),
         },
-        body: JSON.stringify({
-          title: e.target[0].value,
-          isPublished: e.target[1].checked,
-          text: e.target[2].value,
-        }),
-      });
+      );
 
       const responseJson = await response.json();
       setIsEdit(false);
@@ -60,14 +63,17 @@ function Post({
 
   async function deletePost() {
     try {
-      const response = await fetch(`http://localhost:3000/posts/${postId}`, {
-        method: 'DELETE',
-        mode: 'cors',
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://backend-green-butterfly-9917.fly.dev/posts/${postId}`,
+        {
+          method: 'DELETE',
+          mode: 'cors',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json',
+          },
         },
-      });
+      );
 
       await response.json();
       navigate('/');
